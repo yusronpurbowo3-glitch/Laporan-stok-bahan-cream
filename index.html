@@ -1,0 +1,108 @@
+<h2>Form Generator Laporan Stok Complete</h2>
+
+<!-- 1. STOK CREAM -->
+<fieldset>
+  <legend><b>1. Stock Awal Bahan Cream</b></legend>
+  Rsc: <input type="number" id="sa_rsc" placeholder="0"> batch | Sgc: <input type="number" id="sa_sgc" placeholder="0"> batch
+</fieldset><br>
+
+<fieldset>
+  <legend><b>Pengambilan Cream</b></legend>
+  Rsc: <input type="number" id="p_rsc" placeholder="0"> batch | Sgc: <input type="number" id="p_sgc" placeholder="0"> batch
+</fieldset><br>
+
+<fieldset>
+  <legend><b>Pemakaian Cream</b></legend>
+  Rsc: <input type="number" id="pem_rsc" placeholder="0"> batch | Sgc: <input type="number" id="pem_sgc" placeholder="0"> batch
+</fieldset><br>
+
+<fieldset>
+  <legend><b>Sisa Bahan Cream</b></legend>
+  Rsc: <input type="number" id="sisa_rsc" placeholder="0"> batch | Sgc: <input type="number" id="sisa_sgc" placeholder="0"> batch
+</fieldset><br>
+
+<fieldset>
+  <legend><b>Stok Cream</b></legend>
+  Rsc: <input type="number" id="stok_rsc" placeholder="0"> batch | Sgc: <input type="number" id="stok_sgc" placeholder="0"> batch
+</fieldset><br>
+
+<!-- 2. STOK GULA GILING -->
+<fieldset>
+  <legend><b>2. Stok Gula Giling</b></legend>
+  Area Cream (rsc kg): <input type="number" id="gg_rsc" placeholder="0"><br><br>
+  Area Cream (sgc kg): <input type="number" id="gg_sgc" placeholder="0"><br><br>
+  Area Balmill (kg): <input type="number" id="gg_balmill" placeholder="0"><br><br>
+  Area Gwip (kg): <input type="number" id="gg_gwip" placeholder="0">
+</fieldset><br>
+
+<!-- 3. STOCK CBR HALUS -->
+<fieldset>
+  <legend><b>3. Stock CBR Halus</b></legend>
+  S.Awal: <input type="number" id="cbr_awal" placeholder="0"> Batch<br><br>
+  Giling: <input type="number" id="cbr_giling" placeholder="0"> Batch<br><br>
+  Pakai: <input type="number" id="cbr_pakai" placeholder="0"> batch<br><br>
+  S.Akhir: <input type="number" id="cbr_akhir" placeholder="0"> batch
+</fieldset><br>
+
+<button onclick="buatLaporan()" style="padding: 12px 24px; font-weight: bold; background-color: #25D366; color: white; border: none; border-radius: 5px;">Buat Teks Laporan WA</button>
+
+<hr>
+
+<h3>Hasil Teks (Siap Copy ke WA):</h3>
+<textarea id="hasilWA" rows="25" style="width: 100%; font-family: monospace;"></textarea>
+
+<script>
+  function buatLaporan() {
+    let sa_rsc = document.getElementById("sa_rsc").value || 0;
+    let sa_sgc = document.getElementById("sa_sgc").value || 0;
+    let p_rsc = document.getElementById("p_rsc").value || 0;
+    let p_sgc = document.getElementById("p_sgc").value || 0;
+    let pem_rsc = document.getElementById("pem_rsc").value || 0;
+    let pem_sgc = document.getElementById("pem_sgc").value || 0;
+    let sisa_rsc = document.getElementById("sisa_rsc").value || 0;
+    let sisa_sgc = document.getElementById("sisa_sgc").value || 0;
+    let stok_rsc = document.getElementById("stok_rsc").value || 0;
+    let stok_sgc = document.getElementById("stok_sgc").value || 0;
+
+    let gg_rsc = Number(document.getElementById("gg_rsc").value || 0);
+    let gg_sgc = Number(document.getElementById("gg_sgc").value || 0);
+    let gg_balmill = Number(document.getElementById("gg_balmill").value || 0);
+    let gg_gwip = Number(document.getElementById("gg_gwip").value || 0);
+    
+    let total_area_cream = gg_rsc + gg_sgc;
+    let total_gula_giling = total_area_cream + gg_balmill + gg_gwip;
+
+    let cbr_awal = document.getElementById("cbr_awal").value || 0;
+    let cbr_giling = document.getElementById("cbr_giling").value || 0;
+    let cbr_pakai = document.getElementById("cbr_pakai").value || 0;
+    let cbr_akhir = document.getElementById("cbr_akhir").value || 0;
+
+    let teks = "*Stock Awal Bahan Cream*\n" +
+      "Rsc : " + sa_rsc + " batch\n" +
+      "Sgc : " + sa_sgc + " batch\n\n" +
+      "Pengambilan :\n" +
+      "Rsc : " + p_rsc + " batch\n" +
+      "Sgc : " + p_sgc + " batch\n\n" +
+      "Pemakaian\n" +
+      "Rsc : " + pem_rsc + " batch\n" +
+      "Sgc : " + pem_sgc + " batch\n\n" +
+      "Sisa bahan:\n" +
+      "Rsc : " + sisa_rsc + " batch\n" +
+      "Sgc : " + sisa_sgc + " batch\n\n" +
+      "*Stok Cream:*\n" +
+      "Rsc : " + stok_rsc + " batch\n" +
+      "Sgc : " + stok_sgc + " batch\n\n" +
+      "*Stok gula giling*\n" +
+      "*Area Cream : " + total_area_cream + " kg (rsc " + gg_rsc + ", sgc " + gg_sgc + ")\n" +
+      "Area balmill : " + gg_balmill + " kg\n" +
+      "Area Gwip : " + gg_gwip + " kg\n" +
+      "Total Stok Gula Giling : " + total_gula_giling + " kg\n\n" +
+      "*Stock CBR Halus :*\n" +
+      "S.Awal : " + cbr_awal + " Batch\n" +
+      "Giling : " + cbr_giling + " Batch\n" +
+      "Pakai : " + cbr_pakai + " batch\n" +
+      "S.Akhir : " + cbr_akhir + " batch";
+
+    document.getElementById("hasilWA").value = teks;
+  }
+</script>
